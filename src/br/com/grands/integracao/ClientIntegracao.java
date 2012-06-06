@@ -1,6 +1,5 @@
 package br.com.grands.integracao;
 
-import br.com.grands.integracao.xml.PagamentoXml;
 import br.com.grands.integracao.xml.VendaXml;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
@@ -91,61 +90,5 @@ public class ClientIntegracao {
         client = Client.create(config);
 
         return client.resource(BASE_URI).path("integracao");
-    }
-
-    private static String validacaoXml(VendaXml vendaXml) {
-        String mensagem = Boolean.FALSE.toString();
-        if (vendaXml.getCnpjLoja() == null || vendaXml.getCnpjLoja().isEmpty()) {
-            mensagem = "Cnpj não pode ser nulo.";
-        }
-        if (vendaXml.getDataVenda() == null || vendaXml.getDataVenda().isEmpty()) {
-            mensagem = "Data da venda não pode ser nulo.";
-        }
-        if (vendaXml.getNumeroCartao() == null || vendaXml.getNumeroCartao().isEmpty()) {
-            mensagem = "Número do cartão não pode ser nulo.";
-        }
-        if (vendaXml.getNumeroDaVenda().isEmpty() || vendaXml.getNumeroDaVenda() == null) {
-            mensagem = "Número da venda não pode ser nulo.";
-        }
-        if (vendaXml.getValorVenda() == null || vendaXml.getValorVenda().isEmpty()) {
-            mensagem = "Valor da venda não pode ser nulo.";
-        }
-        if (vendaXml.getPagamentoXmlList() == null || vendaXml.getPagamentoXmlList().size() <= 0) {
-            mensagem = "Lista de pagamentos vazia.";
-        } else {
-            for (PagamentoXml xml : vendaXml.getPagamentoXmlList()) {
-                if (xml.getComissaoFormaPagamento() == null || xml.getComissaoFormaPagamento().isEmpty()) {
-                    mensagem = "Descrição da forma de pagamento não pode ser nulo.";
-                }
-                if (xml.getTipoComissaoPagamento() == null || xml.getTipoComissaoPagamento().isEmpty()) {
-                    mensagem = "Tipo da forma de pagamento não pode ser nulo.";
-                } else if (xml.getTipoComissaoPagamento().toUpperCase().equals("CHEQUE")) {
-                    if (xml.getValorCheque() == null || xml.getValorCheque().isEmpty()) {
-                        mensagem = "Valor do cheque não pode ser nulo.";
-                    }
-                    if (xml.getDataVencimento() == null || xml.getDataVencimento().isEmpty()) {
-                        mensagem = "Data de vencimento do cheque não pode ser nulo.";
-                    }
-                    if (xml.getNumeroCheque() == null || xml.getNumeroCheque().isEmpty()) {
-                        mensagem = "Número do cheque não pode ser nulo.";
-                    }
-                    if (xml.getNumeroConta() == null || xml.getNumeroConta().isEmpty()) {
-                        mensagem = "Número da conta não pode ser nulo.";
-                    }
-                    if (xml.getAgencia() == null || xml.getAgencia().isEmpty()) {
-                        mensagem = "Número da agência não pode ser nulo.";
-                    }
-                    if (xml.getCodigoFebraban() == null || xml.getCodigoFebraban().isEmpty()) {
-                        mensagem = "Código febraban do banco não pode ser nulo.";
-                    }
-                }
-                if (xml.getValor() == null || xml.getValor().isEmpty()) {
-                    mensagem = "Valor da venda não pode ser nulo.";
-                }
-
-
-            }
-        }
-        return mensagem;
     }
 }

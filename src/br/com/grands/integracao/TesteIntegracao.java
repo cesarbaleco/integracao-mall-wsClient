@@ -70,5 +70,5 @@ public class TesteIntegracao {
         list.add(pagamentoXml);
         return list;
     }
-  
+
 }
