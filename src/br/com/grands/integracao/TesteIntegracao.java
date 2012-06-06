@@ -1,5 +1,6 @@
 package br.com.grands.integracao;
 
+import br.com.grands.integracao.xml.FormaDePagamentoXml;
 import br.com.grands.integracao.xml.PagamentoXml;
 import br.com.grands.integracao.xml.VendaXml;
 import java.util.ArrayList;
@@ -13,7 +14,17 @@ public class TesteIntegracao {
         testeValidaCartao();
         testeValidaCredito();
         testeValidaConta();
+        test();
         
+    }
+        
+    private static void test() {
+        FormaDePagamentoXml formaDePagamentoXml = ClientIntegracao.getAllFormaPgtoVigente(FormaDePagamentoXml.class);
+        for (int i = 0; i < formaDePagamentoXml.descricaoList.size(); i++) {
+            System.out.println(formaDePagamentoXml.descricaoList.get(i).getDescricao()+".8");
+            System.out.println(formaDePagamentoXml.tipoList.get(i).getTipo()+".9");
+        }
+        System.out.println(formaDePagamentoXml.getValorMaximoCheque()+".10");
     }
     
      public static void testeVenda(){

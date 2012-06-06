@@ -14,6 +14,11 @@ public class ClientIntegracao {
     private static Client client;
     private static String BASE_URI = "http://localhost:8080/mall-ws-integracao/ws";
 
+    public static <T> T getAllFormaPgtoVigente(Class<T> responseType) throws UniformInterfaceException {
+        WebResource resource = config();
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+    
     public static String validaContaBancaria(String codigoFebraban, String agencia, String numeroConta, String cnpj) throws UniformInterfaceException {
         WebResource resource = config();
 
